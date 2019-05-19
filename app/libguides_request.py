@@ -1,5 +1,6 @@
 import requests
 import yaml
+import json
 
 
 class Subject:
@@ -25,9 +26,9 @@ class Subject:
         return requests.get(self.libguides_request).json()
 
     def create_document(self):
-        return {'total_databases': self.total_databases,
+        return json.dumps({'total_databases': self.total_databases,
                 'featured_databases': self.databases,
-                'associated_libguides': self.libguides}
+                'associated_libguides': self.libguides})
 
 
 if __name__ == "__main__":
