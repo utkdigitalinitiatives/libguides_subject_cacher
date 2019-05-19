@@ -26,18 +26,20 @@ class Subject:
         return requests.get(self.libguides_request).json()
 
     def create_document(self):
-        return json.dumps({'total_databases': self.total_databases,
-                'featured_databases': self.databases,
-                'associated_libguides': self.libguides})
+        return json.dumps({
+            'total_databases': self.total_databases,
+            'featured_databases': self.databases,
+            'associated_libguides': self.libguides
+        })
 
 
 if __name__ == "__main__":
     settings = yaml.safe_load(open('config.yml', 'r'))
     subjects = settings['subjects']
     for subject in subjects:
-        x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
-                f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
-                f"&key={settings['api_key']}", subject,
-                f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={settings["api_key"]}&expand=owner')
+        x = Subject(
+            f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
+            f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
+            f"&key={settings['api_key']}", subject,
+            f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={settings["api_key"]}&expand=owner')
         print(x.create_document())
-
