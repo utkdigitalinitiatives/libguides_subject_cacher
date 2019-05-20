@@ -35,11 +35,10 @@ class Subject:
 
 if __name__ == "__main__":
     settings = yaml.safe_load(open('config.yml', 'r'))
-    subjects = settings['subjects']
-    for subject in subjects:
-        x = Subject(
-            f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
-            f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
-            f"&key={settings['api_key']}", subject,
-            f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={settings["api_key"]}&expand=owner')
-        print(x.create_document())
+    for subject in settings['subjects']:
+        with open(f'app/templates/{subject}', 'w') as my_json:
+            x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
+                        f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
+                        f"&key={settings['api_key']}", subject,
+                        f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={settings["api_key"]}&expand=owner')
+            my_json.write(x.create_document())
