@@ -5,13 +5,13 @@ import sys
 
 schedule = BlockingScheduler()
 api_key = os.environ['api-key']
-subjects = os.environ.['subjects'].split(',')
+subjects = os.environ['subjects'].split(',')
 print(type(subjects))
 print(len(subjects))
 sys.stdout.flush()
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=6)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=8)
 def scheduled_job():
     print("Running Scheduled Job")
     for subject in subjects:
