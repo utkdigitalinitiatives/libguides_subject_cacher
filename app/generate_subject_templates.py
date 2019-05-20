@@ -4,16 +4,16 @@ import os
 import sys
 
 schedule = BlockingScheduler()
+api_key = os.environ.get(['api-key'])
+subjects = os.environ.get(['subjects']).split(',')
+print(type(subjects))
+print(len(subjects))
+sys.stdout.flush()
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=59)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=3)
 def scheduled_job():
     print("Running Scheduled Job")
-    api_key = os.environ.get(['api-key'])
-    subjects = os.environ.get(['subjects']).split(',')
-    print(type(subjects))
-    print(len(subjects))
-    sys.stdout.flush()
     for subject in subjects:
         print(f'Generating JSON for {subject}')
         with open(f'templates/{subject}', 'w') as my_json:
