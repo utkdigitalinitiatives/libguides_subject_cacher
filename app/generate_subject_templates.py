@@ -1,6 +1,6 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import yaml
-from .libguides_request import Subject
+from libguides_request import Subject
 import os
 import sys
 
