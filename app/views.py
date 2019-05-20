@@ -3,9 +3,13 @@ import yaml
 from .libguides_request import Subject
 from boto.s3.connection import S3Connection
 import os
+import sys
 
 settings = yaml.safe_load(open('config.yml', 'r'))
 api_key = S3Connection(os.environ['api-key'])
+
+print("Creating Routes")
+sys.stdout.flush()
 
 
 @app.route('/', methods=['GET'])
