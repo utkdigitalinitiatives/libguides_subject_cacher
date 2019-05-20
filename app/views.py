@@ -7,6 +7,12 @@ import os
 settings = yaml.safe_load(open('config.yml', 'r'))
 api_key = S3Connection(os.environ['api-key'])
 
+
+@app.route('/', methods=['GET'])
+def index():
+    return "Hello, World!"
+
+
 for subject in settings['subjects']:
     @app.route(f"/{str(subject)}", methods=['GET'])
     def route_subject():
