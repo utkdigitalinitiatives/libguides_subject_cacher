@@ -32,3 +32,7 @@ for subject in settings['subjects']:
                     f"&key={api_key}", subject,
                     f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={api_key}&expand=owner')
         return x.create_document()
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
