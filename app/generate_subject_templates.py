@@ -7,10 +7,10 @@ import sys
 schedule = BlockingScheduler()
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=44)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=48)
 def scheduled_job():
     print("Running Scheduled Job")
-    settings = yaml.load(open('../config.yml'), 'r')
+    settings = yaml.load(open('config.yml'), 'r')
     api_key = os.environ.get(['api-key'])
     for subject in settings['subjects']:
         print(f'Generating JSON for {subject}')
