@@ -7,7 +7,7 @@ import sys
 schedule = BlockingScheduler()
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=38)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=44)
 def scheduled_job():
     print("Running Scheduled Job")
     settings = yaml.load(open('../config.yml'), 'r')
