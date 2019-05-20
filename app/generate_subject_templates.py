@@ -7,12 +7,12 @@ import sys
 schedule = BlockingScheduler()
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=48)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=18, minute=55)
 def scheduled_job():
     print("Running Scheduled Job")
-    settings = yaml.load(open('config.yml'), 'r')
     api_key = os.environ.get(['api-key'])
-    for subject in settings['subjects']:
+    subjects = os.environ.get(['subjects']).split(',')
+    for subject in subjects:
         print(f'Generating JSON for {subject}')
         with open(f'templates/{subject}', 'w') as my_json:
             x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
