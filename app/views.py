@@ -33,7 +33,7 @@ sys.stdout.flush()
 #         return jsonify(x.create_document())
 
 
-@app.route('/<page>', methods=['GET']):
+@app.route('/<page>', methods=['GET'])
 def route_subject(page):
     print(f"Attempting to create route for {page}")
     x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
