@@ -8,7 +8,6 @@ pyyaml = "*"
 requests = "*"
 flask = "*"
 apscheduler = "*"
-boto = "*"
 gunicorn = "*"
 
 [dev-packages]
