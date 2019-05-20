@@ -1,11 +1,13 @@
 from app import app
 import yaml
 from .libguides_request import Subject
+from boto.s3.connection import S3Connection
+import os
 
 settings = yaml.safe_load(open('config.yml', 'r'))
-subjects = settings['subjects']
+api_key = S3Connection(os.environ['api-key'])
 
-for subject in subjects:
+for subject in settings['subjects']:
     @app.route(f"/{str(subject)}", methods=['GET'])
     def route_subject():
         x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="

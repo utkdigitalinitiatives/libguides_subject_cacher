@@ -1,6 +1,8 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import yaml
 from .libguides_request import Subject
+from boto.s3.connection import S3Connection
+import os
 
 schedule = BlockingScheduler()
 
@@ -9,6 +11,7 @@ schedule = BlockingScheduler()
 def scheduled_job():
     print("Running Scheduled Job")
     settings = yaml.load(open('../config.yml'), 'r')
+    api_key = S3Connection(os.environ['api-key'])
     for subject in settings['subjects']:
         with open(f'templates/{subject}', 'w') as my_json:
             x = Subject(f"https://lgapi-us.libapps.com/1.1/assets?site_id=681&asset_types=10&expand="
