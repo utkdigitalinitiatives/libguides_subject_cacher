@@ -1,6 +1,6 @@
 from app import app
 import yaml
-from app.libguides_request import Subject
+from .libguides_request import Subject
 import os
 import sys
 
