@@ -1,13 +1,10 @@
-# from app import app
+from app import app
 import yaml
 from app.libguides_request import Subject
 from boto.s3.connection import S3Connection
 import os
-from flask import Flask
 import sys
 
-app = Flask(__name__)
-app.config.from_object('config')
 
 print("Starting Flask")
 sys.stdout.flush()
@@ -33,6 +30,3 @@ for subject in settings['subjects']:
                     f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={api_key}&expand=owner')
         return x.create_document()
 
-
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
