@@ -8,7 +8,7 @@ api_key = os.environ['api-key']
 subjects = os.environ['subjects'].split(',')
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=26)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=55)
 def scheduled_job():
     print("Running Scheduled Job")
     for subject in subjects:
