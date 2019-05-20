@@ -1,9 +1,16 @@
-from app import app
+# from app import app
 import yaml
-from .libguides_request import Subject
+from app.libguides_request import Subject
 from boto.s3.connection import S3Connection
 import os
+from flask import Flask
 import sys
+
+app = Flask(__name__)
+app.config.from_object('config')
+
+print("Starting Flask")
+sys.stdout.flush()
 
 settings = yaml.safe_load(open('config.yml', 'r'))
 api_key = S3Connection(os.environ['api-key'])
