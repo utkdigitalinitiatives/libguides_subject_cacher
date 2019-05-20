@@ -1,7 +1,6 @@
 from app import app
 import yaml
 from app.libguides_request import Subject
-from boto.s3.connection import S3Connection
 import os
 import sys
 
@@ -10,7 +9,7 @@ print("Starting Flask")
 sys.stdout.flush()
 
 settings = yaml.safe_load(open('config.yml', 'r'))
-api_key = S3Connection(os.environ['api-key'])
+api_key = os.environ['api-key']
 
 print("Creating Routes")
 sys.stdout.flush()
