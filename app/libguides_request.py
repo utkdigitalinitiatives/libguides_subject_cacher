@@ -1,6 +1,4 @@
 import requests
-import yaml
-import json
 
 
 class Subject:
