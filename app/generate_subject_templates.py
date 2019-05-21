@@ -14,7 +14,7 @@ access_key = os.environ['S3_access_key']
 s3_connection = boto3.resource('s3')
 
 
-@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=45)
+@schedule.scheduled_job('cron', day_of_week='mon-sun', hour=19, minute=47)
 def scheduled_job():
     print("Running Scheduled Job")
     for subject in subjects:
