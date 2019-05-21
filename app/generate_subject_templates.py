@@ -12,7 +12,10 @@ secret_key = os.environ['S3_secret_key']
 access_key = os.environ['S3_access_key']
 hour = int(os.environ['hour'])
 minute = int(os.environ['minute'])
-s3_connection = boto3.client('s3', access_key=access_key, secret_key=secret_key)
+s3_connection = boto3.client('s3',
+                             aws_access_key_id=access_key,
+                             aws_secret_access_key=secret_key
+                             )
 
 
 @schedule.scheduled_job('cron', day_of_week='mon-sun', hour=hour, minute=minute)
