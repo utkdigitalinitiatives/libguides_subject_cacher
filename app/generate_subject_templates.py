@@ -12,7 +12,7 @@ secret_key = os.environ['S3_secret_key']
 access_key = os.environ['S3_access_key']
 hour = int(os.environ['hour'])
 minute = int(os.environ['minute'])
-s3_connection = boto3.resource('s3')
+s3_connection = boto3.resource('s3', access_key=access_key, secret_key=secret_key)
 
 
 @schedule.scheduled_job('cron', day_of_week='mon-sun', hour=hour, minute=minute)
@@ -27,8 +27,8 @@ def scheduled_job():
         json_response = str(x.create_document())
         print(json_response)
         sys.stdout.flush()
-        object = s3_connection.Object(bucket, subject)
-        object.put(Body=str.encode(json_response))
+        my_object = s3_connection.Object(bucket, f'responses/{subject}')
+        my_object.put(Body=str.encode(json_response))
     return
 
 
