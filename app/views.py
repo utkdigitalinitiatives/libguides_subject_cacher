@@ -3,7 +3,6 @@ import os
 from flask import jsonify
 import json
 import boto3
-import sys
 
 api_key = os.environ['api-key']
 bucket = os.environ['S3_bucket_name']
@@ -18,7 +17,6 @@ s3_connection = boto3.client('s3',
 @app.route('/<page>', methods=['GET'])
 def route_subject(page):
     s3_object = s3_connection.get_object(Bucket=bucket, Key=f'responses/{page}')
-    print(type(s3_object['Body']))
-    print(s3_object['Body'])
-    sys.stdout.flush()
-    return jsonify(json.loads(s3_object['Body']))
+    body = s3_object['Body'].read()
+    json_string = body.decode('utf-8')
+    return jsonify(json.dumps(json_string))
