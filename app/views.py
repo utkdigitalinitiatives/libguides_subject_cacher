@@ -19,4 +19,4 @@ def route_subject(page):
     s3_object = s3_connection.get_object(Bucket=bucket, Key=f'responses/{page}')
     body = s3_object['Body'].read()
     json_string = body.decode('utf-8')
-    return jsonify(json.dumps(json_string))
+    return jsonify(json_string)
