@@ -2,12 +2,23 @@ from app import app
 import os
 from flask import jsonify
 import json
+import boto3
+import sys
 
 api_key = os.environ['api-key']
+bucket = os.environ['S3_bucket_name']
+secret_key = os.environ['S3_secret_key']
+access_key = os.environ['S3_access_key']
+s3_connection = boto3.client('s3',
+                             aws_access_key_id=access_key,
+                             aws_secret_access_key=secret_key
+                             )
 
 
 @app.route('/<page>', methods=['GET'])
 def route_subject(page):
-    x = open(f'app/templates/{page}', 'r')
-    return jsonify(json.loads(x.read()))
-
+    s3_object = s3_connection.get_object(Bucket=bucket, Key=f'responses/{page}')
+    print(type(s3_object['Body']))
+    print(s3_object['Body'])
+    sys.stdout.flush()
+    return jsonify(json.loads(s3_object['Body']))
