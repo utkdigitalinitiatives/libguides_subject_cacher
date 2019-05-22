@@ -18,5 +18,7 @@ s3_connection = boto3.client('s3',
 def route_subject(page):
     s3_object = s3_connection.get_object(Bucket=bucket, Key=f'responses/{page}')
     body = s3_object['Body'].read()
-    json_string = body.decode('utf-8')
+    decoded = body.decode('utf-8')
+    json_dumped = json.dumps(decoded)
+    json_string = json.loads(json_dumped)
     return jsonify(json_string)
