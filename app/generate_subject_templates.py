@@ -3,6 +3,7 @@ from libguides_request import Subject
 import os
 import sys
 import boto3
+import json
 
 schedule = BlockingScheduler()
 api_key = os.environ['api-key']
@@ -27,10 +28,11 @@ def scheduled_job():
                     f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
                     f"&key={api_key}", subject,
                     f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={api_key}&expand=owner')
-        json_response = str(x.create_document())
-        print(json_response)
+        json_response = json.dumps(x.create_document())
+        json_string = json.loads(json_response)
+        print(json_string)
         sys.stdout.flush()
-        s3_connection.put_object(Body=str.encode(json_response), Bucket=bucket, Key=f'responses/{subject}')
+        s3_connection.put_object(Body=str.encode(json_string), Bucket=bucket, Key=f'responses/{subject}')
     return
 
 
