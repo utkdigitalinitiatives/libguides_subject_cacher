@@ -28,11 +28,10 @@ def scheduled_job():
                     f"permitted_uses,az_types,az_props,subjects,icons,friendly_url,permitted_uses"
                     f"&key={api_key}", subject,
                     f'http://lgapi-us.libapps.com/1.1/guides?site_id=681&key={api_key}&expand=owner')
-        json_response = json.loads(x.create_document())
-        json_string = json.dumps(json_response)
-        print(json_string)
+        json_response = json.dumps(x.create_document())
+        print(json_response)
         sys.stdout.flush()
-        s3_connection.put_object(Body=str.encode(json_string), Bucket=bucket, Key=f'responses/{subject}')
+        s3_connection.put_object(Body=bytes(json_response.encode('utf-8')), Bucket=bucket, Key=f'responses/{subject}')
     return
 
 
